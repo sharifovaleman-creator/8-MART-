@@ -1,0 +1,278 @@
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heroes</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #f9f9f9;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: flex-end;
+      padding: 15px;
+    }
+
+    #langSelect {
+      font-size: 16px;
+      padding: 5px 10px;
+      border-radius: 8px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .intro {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 30px;
+      color: #444;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: 0.8s;
+    }
+
+    .card.show {
+      opacity:1;
+      transform: translateY(0);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #444;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      padding: 20px;
+    }
+
+    .buttons a {
+      text-decoration: none;
+      background: #e91e63;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      transition: 0.2s;
+    }
+
+    .buttons a:hover {
+      transform: translateY(-3px);
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <select id="langSelect">
+      <option value="az">🇦🇿</option>
+      <option value="en">🇬🇧</option>
+      <option value="ru">🇷🇺</option>
+      <option value="ge">🇬🇪</option>
+      <option value="hy">🇦🇲</option>
+    </select>
+  </div>
+
+  <div class="container">
+    <div class="intro" id="introText">
+      Bu xüsusi gündə dünya tarixinin ən uğurlu, həyatları boyu mübarizə aparan, tarixə damğa vuran qadınları təqdim edirik.
+    </div>
+
+    <!-- Cleopatra -->
+    <div class="card">
+      <img src="img/cleopatra.jpg" alt="Kleopatra">
+      <p id="text1">
+        Kleopatra — Misir kraliçası, tarixin ən güclü və ağıllı qadın liderlərindən biri.
+      </p>
+    </div>
+
+    <!-- Frida Kahlo -->
+    <div class="card">
+      <img src="img/frida.jpg" alt="Frida Kahlo">
+      <p id="text2">
+        Frida Kahlo — Məşhur Meksikalı rəssam, fərdi ifadəsi və güclü ruhu ilə tanınır.
+      </p>
+    </div>
+
+    <!-- Marie Curie -->
+    <div class="card">
+      <img src="img/marie.jpg" alt="Marie Curie">
+      <p id="text3">
+        Marie Curie — Fizika və Kimya Nobel mükafatı qazanan alim, radium və poloniumun kəşfçisi.
+      </p>
+    </div>
+
+    <!-- Leyla Mammadbayova -->
+    <div class="card">
+      <img src="img/leyla.jpg" alt="Leyla Mammadbayova">
+      <p id="text4">
+        Leyla Mammadbayova — Azərbaycanın elmi və sosial sahədə önəmli uğurları olan qadını.
+      </p>
+    </div>
+
+    <!-- İzzet Orucova -->
+    <div class="card">
+      <img src="img/izzet.jpg" alt="İzzet Orucova">
+      <p id="text5">
+        İzzet Orucova — Azərbaycan mədəniyyətində önəmli rol oynayan tanınmış sənətkar.
+      </p>
+    </div>
+
+    <!-- Dorothy Hodgkin -->
+    <div class="card">
+      <img src="img/dorothy.jpg" alt="Dorothy Hodgkin">
+      <p id="text6">
+        Dorothy Hodgkin — Kimya üzrə Nobel mükafatı almış ingilis alim.
+      </p>
+    </div>
+
+    <!-- Helen Keller -->
+    <div class="card">
+      <img src="img/helen.jpg" alt="Helen Keller">
+      <p id="text7">
+        Helen Keller — Sağır və kor olmasına baxmayaraq, dünya miqyasında təhsil və insan hüquqları sahəsində nümunə oldu.
+      </p>
+    </div>
+
+    <!-- Carica Tamara -->
+    <div class="card">
+      <img src="img/tamara.jpg" alt=" Tamara">
+      <p id="text8">
+         Tamara — Gürcüstanın məşhur tarixi şahzadəsi, xalq arasında hörmətli qadın.
+      </p>
+    </div>
+
+    <div class="buttons">
+      <a id="backbtn" href="index.html">geri</a>
+    </div>
+
+  </div>
+
+  <script>
+    // dil translation
+    const translations = {
+      az: {
+        intro: "Bu xüsusi gündə dünya tarixinin ən uğurlu, həyatları boyu mübarizə aparan, tarixə damğa vuran qadınları təqdim edirik.",
+        text1: "Kleopatra — Misir kraliçası, tarixin ən güclü və ağıllı qadın liderlərindən biri.",
+        text2: "Frida Kahlo — Məşhur Meksikalı rəssam, fərdi ifadəsi və güclü ruhu ilə tanınır.",
+        text3: "Marie Curie — Fizika və Kimya Nobel mükafatı qazanan alim, radium və poloniumun kəşfçisi.",
+        text4: "Leyla Mammadbayova — Azərbaycanın elmi və sosial sahədə önəmli uğurları olan qadını.",
+        text5: "İzzet Orucova — Azərbaycan mədəniyyətində önəmli rol oynayan tanınmış sənətkar.",
+        text6: "Dorothy Hodgkin — Kimya üzrə Nobel mükafatı almış ingilis alim.",
+        text7: "Helen Keller — Sağır və kor olmasına baxmayaraq, dünya miqyasında təhsil və insan hüquqları sahəsində nümunə oldu.",
+        text8: " Tamara — Gürcüstanın məşhur tarixi şahzadəsi, xalq arasında hörmətli qadın.",
+        back: "geri"
+      },
+      en: {
+        intro: "On this special day, we present the most successful women in world history who made a mark throughout their lives.",
+        text1: "Cleopatra — Egyptian queen, one of the most powerful and intelligent female leaders in history.",
+        text2: "Frida Kahlo — Famous Mexican painter, known for her personal expression and strong spirit.",
+        text3: "Marie Curie — Physicist and chemist, Nobel prize winner, discoverer of radium and polonium.",
+        text4: "Leyla Mammadbayova — Prominent Azerbaijani woman in science and social work.",
+        text5: "Izzet Orucova — Famous Azerbaijani artist with important cultural contributions.",
+        text6: "Dorothy Hodgkin — English chemist, Nobel laureate.",
+        text7: "Helen Keller — Despite being deaf and blind, she became an example in education and human rights worldwide.",
+        text8: " Tamara — Famous historical princess of Georgia, respected among the people.",
+        back: "back"
+      },
+      ru: {
+        intro: "В этот особый день мы представляем самых успешных женщин в истории мира, которые оставили след на протяжении своей жизни.",
+        text1: "Клеопатра — Египетская царица, одна из самых сильных и умных женщин-лидеров в истории.",
+        text2: "Фрида Кало — Известная мексиканская художница, известная своим выражением и сильным духом.",
+        text3: "Мария Кюри — Физик и химик, лауреат Нобелевской премии, открывшая радий и полоний.",
+        text4: "Лейла Маммадбаева — Ведущая азербайджанская женщина в науке и социальной деятельности.",
+        text5: "Иззет Оруджова — Известная азербайджанская художница с важными культурными достижениями.",
+        text6: "Дороти Ходжкин — Английский химик, лауреат Нобелевской премии.",
+        text7: "Хелен Келлер — Несмотря на глухоту и слепоту, она стала примером в образовании и правах человека во всем мире.",
+        text8: " Тамара — Известная историческая принцесса Грузии, уважаемая среди народа.",
+        back: "назад"
+      },
+      ge: {
+        intro: "ამ განსაკუთრებულ დღეში წარმოგიდგენთ ყველაზე წარმატებულ ქალებს მსოფლიო ისტორიიდან, რომლებმაც სიცოცხლის განმავლობაში დატოვეს კვალი.",
+        text1: "კლეოპატრა — ეგვიპტელთა დედოფალი, ისტორიის ერთ-ერთი ყველაზე ძლიერი და ჭკვიანი ქალი ლიდერი.",
+        text2: "ფრიდა კალო — ცნობილი მექსიკელი მხატვარი, თავისი ინდივიდუალური გამოხატულებით და ძლიერი სულით ცნობილია.",
+        text3: "მარი კიური — ფიზიკოსი და ქიმიკოსი, ნობელის პრემიის ლაურეატი, რადიუმის და პოლონიუმის გამოგონება.",
+        text4: "ლეილა მამმადბაიოვა — აზერბაიჯანის წამყვანი ქალი მეცნიერება და სოციალური საქმიანობაში.",
+        text5: "იზზეტ ორუჯოვა — ცნობილი აზერბაიჯანელი ხელოვანი კულტურული წვლილით.",
+        text6: "დოროთი ჰოჯკინი — ინგლისელი ქიმიკოსი, ნობელის პრემიის ლაურეატი.",
+        text7: "ჰელენ კელერი — ბრმა და ყრუ, თუმცა გახდა მაგალითი განათლების და ადამიანის უფლებების სფეროში.",
+        text8: " თამარა — ცნობილი ისტორიული პრინცესა გურჯეთიდან, პატივსაცემი ხალხში.",
+        back: "უკან"
+      },
+      hy: {
+        intro: "Այս հատուկ օրը մենք ներկայացնում ենք աշխարհի պատմության ամենահաջողակ կանանց, ովքեր իրենց կյանքի ընթացքում թողել են նշան:",
+        text1: "Կլեոպատրա — Եգիպտացի թագուհի, պատմության ամենահզոր և խելացի կանանցից մեկը:",
+        text2: "Ֆրիդա Կալո — Մեքսիկական հայտնի նկարիչ, հայտնի իր անհատական արտահայտությամբ և ուժեղ ոգով:",
+        text3: "Մարի Կյուրի — Ֆիզիկոս և քիմիկոս, Նոբելյան մրցանակի դափնեկիր, ռադիումի և պոլոնիումի հայտնաբերող:",
+        text4: "Լեյլա Մամմադբայովա — Ադրբեջանի գիտության և հասարակական ոլորտում առաջատար կին:",
+        text5: "Իզզեթ Օրուչովա — Ադրբեջանի մշակույթի մեջ հայտնի կին արվեստագետ:",
+        text6: "Դորոթի Հոջկին — Անգլիացի քիմիկոս, Նոբելյան մրցանակի դափնեկիր:",
+        text7: "Հելեն Կելլեր — Չնայած լսողության և տեսողության խնդիրներին, նա օրինակ դարձավ կրթության և մարդու իրավունքների ոլորտում:",
+        text8: " Թամարա — Վրաստանի հայտնի պատմական արքայադուստր, հարգված ժողովրդի մեջ:",
+        back: "հետ"
+      }
+    };
+
+    const savedLang = localStorage.getItem("lang") || "az";
+    document.getElementById("langSelect").value = savedLang;
+    applyLanguage(savedLang);
+
+    document.getElementById("langSelect").addEventListener("change", function(){
+      const selectedLang = this.value;
+      localStorage.setItem("lang", selectedLang);
+      applyLanguage(selectedLang);
+    });
+
+    function applyLanguage(lang){
+      if(!translations[lang]) return;
+
+      document.getElementById("introText").textContent = translations[lang].intro;
+      for(let i=1;i<=8;i++){
+        document.getElementById("text"+i).textContent = translations[lang]["text"+i];
+      }
+      document.getElementById("backbtn").textContent = translations[lang].back;
+
+      document.documentElement.lang = lang;
+    }
+
+    // Scroll animasiya
+    const cards = document.querySelectorAll(".card");
+    const observer = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add("show");
+        }
+      });
+    });
+    cards.forEach(card=>observer.observe(card));
+
+  </script>
+</body>
+</html>

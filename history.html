@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>8 Mart Tarixi</title>
+
+<style>
+
+body{
+margin:0;
+font-family:sans-serif;
+background:#fff5f8;
+}
+
+/* dil secimi */
+.top-bar{
+display:flex;
+justify-content:flex-end;
+padding:15px;
+}
+
+#langSelect{
+font-size:16px;
+padding:6px 10px;
+border-radius:8px;
+}
+
+/* container */
+.container{
+max-width:600px;
+margin:auto;
+padding:20px;
+}
+
+/* diplom stil */
+.certificate{
+background:white;
+border:8px solid #e91e63;
+border-radius:20px;
+padding:30px;
+box-shadow:0 15px 40px rgba(0,0,0,0.2);
+}
+
+.title{
+text-align:center;
+color:#e91e63;
+}
+
+.line{
+width:80px;
+height:4px;
+background:#e91e63;
+margin:15px auto 30px auto;
+border-radius:5px;
+}
+
+/* kartlar */
+
+.card{
+background:white;
+border-radius:15px;
+padding:15px;
+margin-bottom:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+
+opacity:0;
+transform:translateY(40px);
+transition:0.8s;
+}
+
+.card.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.card img{
+width:100%;
+border-radius:10px;
+margin-bottom:10px;
+}
+
+.card p{
+font-size:15px;
+line-height:1.6;
+}
+
+/* alt yazi */
+
+.sign{
+text-align:center;
+margin-top:20px;
+font-weight:bold;
+color:#e91e63;
+}
+
+/* geri duymesi */
+
+.buttons{
+display:flex;
+justify-content:center;
+margin-top:20px;
+}
+
+.buttons a{
+text-decoration:none;
+background:#e91e63;
+color:white;
+padding:12px 20px;
+border-radius:12px;
+box-shadow:0 6px 15px rgba(0,0,0,0.2);
+}
+
+.buttons a:hover{
+transform:translateY(-3px);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="top-bar">
+<select id="langSelect">
+<option value="az">🇦🇿</option>
+<option value="en">🇬🇧</option>
+<option value="ru">🇷🇺</option>
+<option value="ge">🇬🇪</option>
+<option value="hy">🇦🇲</option>
+</select>
+</div>
+
+<div class="container">
+
+<div class="certificate">
+
+<h1 id="title" class="title">8 Mart</h1>
+
+<div class="line"></div>
+
+<div class="card">
+<img src="img/history1.jpg">
+<p id="text1"></p>
+</div>
+
+<div class="card">
+<img src="img/history2.jpg">
+<p id="text2"></p>
+</div>
+
+<div class="card">
+<img src="img/history3.jpg">
+<p id="text3"></p>
+</div>
+
+<div class="sign" id="sign"></div>
+
+</div>
+
+<div class="buttons">
+<a id="backbtn" href="index.html">geri</a>
+</div>
+
+</div>
+
+<script>
+
+/* translations */
+
+const translations={
+
+az:{
+title:"8 Mart",
+text1:"8 Mart – Beynəlxalq Qadınlar Günüdür. Bu gün qadınların hüquqları, bərabərliyi və cəmiyyətdəki rolunu xatırlamaq üçün qeyd olunur.",
+text2:"Bu günün tarixi 1908-ci ildə ABŞ-da qadın işçilərin daha yaxşı əmək şəraiti və hüquqları üçün keçirdiyi etirazlardan başlayır.",
+text3:"1977-ci ildə isə BMT bu günü rəsmi olaraq Beynəlxalq Qadınlar Günü kimi qəbul etmişdir.",
+sign:"Qadınlar dünyanı dəyişən gücdür",
+back:"geri"
+},
+
+en:{
+title:"March 8",
+text1:"March 8 is International Women's Day. It celebrates women's rights, equality and their role in society.",
+text2:"The history of this day begins with protests of women workers in the USA in 1908 for better working conditions and rights.",
+text3:"In 1977 the United Nations officially recognized March 8 as International Women's Day.",
+sign:"Women are the power that changes the world",
+back:"back"
+},
+
+ru:{
+title:"8 марта",
+text1:"8 марта — Международный женский день. Он посвящён правам женщин и их роли в обществе.",
+text2:"История этого дня начинается с протестов женщин-работниц в США в 1908 году.",
+text3:"В 1977 году ООН официально признала этот день Международным женским днем.",
+sign:"Женщины — сила, меняющая мир",
+back:"назад"
+},
+
+ge:{
+title:"8 მარტი",
+text1:"8 მარტი ქალთა საერთაშორისო დღეა. ეს დღე ქალთა უფლებებსა და მათ როლს უსვამს ხაზს.",
+text2:"დღის ისტორია იწყება 1908 წელს ამერიკაში ქალ მუშათა პროტესტით.",
+text3:"1977 წელს გაერომ ოფიციალურად აღიარა 8 მარტი ქალთა საერთაშორისო დღედ.",
+sign:"ქალები არიან ძალა, რომელიც ცვლის სამყაროს",
+back:"უკან"
+},
+
+hy:{
+title:"Մարտի 8",
+text1:"Մարտի 8-ը Կանանց միջազգային օրն է։ Այն նվիրված է կանանց իրավունքներին և հասարակության մեջ նրանց դերին։",
+text2:"Օրվա պատմությունը սկսվում է 1908 թվականին ԱՄՆ-ում կանանց աշխատանքային բողոքներից։",
+text3:"1977 թվականին ՄԱԿ-ը պաշտոնապես ճանաչեց այս օրը որպես Կանանց միջազգային օր։",
+sign:"Կանայք աշխարհը փոխող ուժն են",
+back:"հետ"
+}
+
+}
+
+/* dil secimi */
+
+const savedLang=localStorage.getItem("lang")||"az"
+
+document.getElementById("langSelect").value=savedLang
+
+applyLanguage(savedLang)
+
+document.getElementById("langSelect").addEventListener("change",function(){
+
+const lang=this.value
+
+localStorage.setItem("lang",lang)
+
+applyLanguage(lang)
+
+})
+
+function applyLanguage(lang){
+
+if(!translations[lang]) return
+
+document.getElementById("title").textContent=translations[lang].title
+document.getElementById("text1").textContent=translations[lang].text1
+document.getElementById("text2").textContent=translations[lang].text2
+document.getElementById("text3").textContent=translations[lang].text3
+document.getElementById("sign").textContent=translations[lang].sign
+document.getElementById("backbtn").textContent=translations[lang].back
+
+document.documentElement.lang=lang
+
+}
+
+/* scroll animation */
+
+const cards=document.querySelectorAll(".card")
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("show")
+}
+})
+})
+
+cards.forEach(card=>{
+observer.observe(card)
+})
+
+</script>
+
+</body>
+</html>

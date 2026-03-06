@@ -1,0 +1,420 @@
+<!-- <html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TEST</title>
+  <style>
+        body {
+  margin: 0;
+  font-family: sans-serif;
+}
+ @media (min-width:768px) {
+  .buttons {
+    max-width: 500px;
+    margin: auto;
+  }
+ }
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+}
+
+.buttons a {
+  text-decoration: none;
+  background: #e91e63;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transition: 0.2s;
+}
+
+.buttons a:hover {
+  transform: translateY(-3px);
+}
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px;
+}
+#langSelect {
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+  </style>
+    <div class="top-bar">
+    <select id="langSelect">
+      <option value="az">🇦🇿</option>
+      <option value="en">🇬🇧</option>
+      <option value="ru">🇷🇺</option>
+      <option value="ge">🇬🇪</option>
+      <option value="hy">🇦🇲</option>
+    </select>
+  </div>
+  <div class="buttons" >
+    <a id="backbtn" href="index.html" > geri </a>
+  </div>
+  <script>
+  
+  const translations = {
+    az:{
+      back:"geri"
+    },
+    en:{
+      back:"back"
+    },
+    ge:{
+      back:"უკან"
+    },
+    ru:{
+      back:"назад"
+    },
+    hy:{
+      back:"հետ"
+    }
+  };
+  
+    const savedLang = localStorage.getItem("lang") || "az";
+document.getElementById("langSelect").value = savedLang;
+applyLanguage(savedLang);
+
+document.getElementById("langSelect").addEventListener("change", function(){
+  const selectedLang = this.value;
+  localStorage.setItem("lang", selectedLang);
+  applyLanguage(selectedLang);
+});
+function applyLanguage(lang) {
+  if (!translations[lang]) return;
+
+  document.getElementById("backbtn").textContent = translations[lang].back;
+  
+  document.documentElement.lang = lang;
+}
+  </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Suallıq Test</title>
+    <style>
+        body { font-family: sans-serif; margin: 0; background: #fafafa; color: #333; }
+        .top-bar { display: flex; justify-content: flex-end; padding: 15px; }
+        #langSelect { font-size: 16px; padding: 5px 10px; border-radius: 8px; cursor: pointer; }
+        #quiz { max-width: 600px; margin: auto; }
+        .question { display: none; padding: 20px; animation: fadeIn 0.5s; }
+        .active { display: block; }
+        .answers button { 
+            display: block; width: 100%; margin: 10px 0; padding: 15px; 
+            border: none; border-radius: 10px; background: #e91e63; 
+            color: white; font-size: 16px; cursor: pointer; transition: 0.3s;
+        }
+        .answers button:hover { background: #c2185b; transform: scale(1.02); }
+        .answers button.selected { background: #333; border: 2px solid #000; }
+        .nav { display: flex; justify-content: space-between; margin-top: 20px; gap: 10px; }
+        .nav button { 
+            flex: 1; padding: 12px; border: none; border-radius: 8px; 
+            background: #222; color: white; cursor: pointer; font-size: 14px;
+        }
+        #result { text-align: center; padding: 30px; display: none; }
+        #result img { width: 100%; max-width: 300px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin: 20px 0; }
+        .buttons { display: flex; flex-direction: column; padding: 0 20px; max-width: 600px; margin: auto; }
+        .buttons a { 
+            text-decoration: none; background: #555; color: white; padding: 10px; 
+            text-align: center; border-radius: 8px; transition: 0.2s; font-size: 14px;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+<div class="top-bar">
+    <select id="langSelect">
+        <option value="az">🇦🇿</option>
+        <option value="en">🇬🇧</option>
+        <option value="ru">🇷🇺</option>
+        <option value="ge">🇬🇪</option>
+        <option value="hy">🇦🇲</option>
+    </select>
+</div>
+
+<div class="buttons">
+    <a id="backbtn" href="index.html">geri</a>
+</div>
+
+<div id="quiz"></div>
+
+<div id="result">
+    <h2 id="resTitle"></h2>
+    <img id="resImage" src="" alt="Result">
+    <p id="resDesc"></p>
+    <div class="nav"><button onclick="location.reload()" id="retryBtn">Yenidən başla</button></div>
+</div>
+
+<script>
+const languages = {
+    az: {
+        back: "Geri", retry: "Yenidən başla", next: "İrəli", prev: "Geri", finish: "Öyrən",
+        alert: "Zəhmət olmasa bir variant seçin!",
+        results: [
+            {title:"Xəyalpərəst qadın", desc:"Sən xəyal gücü yüksək bir insansan.", img:"1.jpg"},
+            {title:"Yaradıcı qadın", desc:"Sən yeni ideyalar yaradan insansan.", img:"2.jpg"},
+            {title:"Mərhəmətli qadın", desc:"Ürəyin çox yumşaqdır.", img:"3.jpg"},
+            {title:"Mükəmməl qadın", desc:"Hər şeydə balans yaradırsan.", img:"4.jpg"},
+            {title:"Fiziki güclü qadın", desc:"Enerjin çox yüksəkdir.", img:"5.jpg"},
+            {title:"Duyğusal güclü qadın", desc:"Duyğularını idarə edə bilirsən.", img:"6.jpg"},
+            {title:"Romantik qadın", desc:"Sevgi sənin üçün önəmlidir.", img:"7.jpg"},
+            {title:"Realist qadın", desc:"Ayağın yerə möhkəm basır.", img:"8.jpg"},
+            {title:"Səmimi qadın", desc:"İnsanlar sənə tez güvənir.", img:"9.jpg"},
+            {title:"Hər şeyi bacaran qadın", desc:"Sən çox yönlü güclü insansan.", img:"10.jpg"}
+        ],
+        questions: [
+            {q:"1. Yaşın neçədir?", a:["20-dən az","20-25","25-35","35+"]},
+            {q:"2. Statusun?", a:["Məktəb","Universitet","İşləyirəm","İşləmirəm"]},
+            {q:"3. Hobbin nədir?", a:["Oxumaq","Rəsm","Səyahət","İdman"]},
+            {q:"4. Sevdiyin rəng?", a:["Ağ","Mavi","Qırmızı","Qara"]},
+            {q:"5. Sevdiyin musiqi?", a:["Pop","Rock","Romantik","Rap"]},
+            {q:"6. Kimlə vaxt keçirməyi sevirsən?", a:["Ailə","Dostlar","Tək","Sevdiyim insan"]},
+            {q:"7. Harada yaşamaq istəyərdin?", a:["Şəhər","Kənd","Təbiət","Dəniz"]},
+            {q:"8. Geyim tərzin?", a:["Sadə","Moda","Sport","Elegant"]},
+            {q:"9. Sevdiyin film növü?", a:["Fantastik","Drama","Komediya","Romantik"]},
+            {q:"10. Sevdiyin heyvan?", a:["İt","Quş","Dovşan","Pişik"]}
+        ]
+    },
+    en: {
+        back: "Back", retry: "Restart", next: "Next", prev: "Back", finish: "Results",
+        alert: "Please select an option!",
+        results: [
+            {title:"Dreamy Woman", desc:"You have a vivid imagination.", img:"1.jpg"},
+            {title:"Creative Woman", desc:"You create new ideas.", img:"2.jpg"},
+            {title:"Compassionate Woman", desc:"Your heart is very soft.", img:"3.jpg"},
+            {title:"Perfect Woman", desc:"You create balance in everything.", img:"4.jpg"},
+            {title:"Physically Strong Woman", desc:"Your energy is very high.", img:"5.jpg"},
+            {title:"Emotionally Strong Woman", desc:"You can control your emotions.", img:"6.jpg"},
+            {title:"Romantic Woman", desc:"Love is important to you.", img:"7.jpg"},
+            {title:"Realist Woman", desc:"You have your feet firmly on the ground.", img:"8.jpg"},
+            {title:"Sincere Woman", desc:"People trust you quickly.", img:"9.jpg"},
+            {title:"Versatile Woman", desc:"You are a strong and multi-talented person.", img:"10.jpg"}
+        ],
+        questions: [
+            {q:"1. What is your age?", a:["Under 20","20-25","25-35","35+"]},
+            {q:"2. Your status?", a:["School","University","Working","Not working"]},
+            {q:"3. What is your hobby?", a:["Reading","Drawing","Traveling","Sports"]},
+            {q:"4. Favorite color?", a:["White","Blue","Red","Black"]},
+            {q:"5. Favorite music?", a:["Pop","Rock","Romantic","Rap"]},
+            {q:"6. Who do you like to spend time with?", a:["Family","Friends","Alone","Loved one"]},
+            {q:"7. Where would you like to live?", a:["City","Village","Nature","Sea"]},
+            {q:"8. Your clothing style?", a:["Simple","Fashionable","Sporty","Elegant"]},
+            {q:"9. Favorite movie genre?", a:["Fantasy","Drama","Comedy","Romantic"]},
+            {q:"10. Favorite animal?", a:["Dog","Bird","Rabbit","Cat"]}
+        ]
+    },
+    ru: {
+        back:"Назад", retry:"Заново", next:"Далее", prev:"Назад", finish:"Узнать",
+        alert: "Пожалуйста, выберите вариант!",
+        results: [
+            {title:"Мечтательная женщина", desc:"У тебя богатое воображение.", img:"1.jpg"},
+            {title:"Творческая женщина", desc:"Ты создаешь новые идеи.", img:"2.jpg"},
+            {title:"Сострадательная женщина", desc:"У тебя мягкое сердце.", img:"3.jpg"},
+            {title:"Идеальная женщина", desc:"Ты создаешь баланс во всем.", img:"4.jpg"},
+            {title:"Физически сильная женщина", desc:"Твоя энергия очень высока.", img:"5.jpg"},
+            {title:"Эмоционально сильная женщина", desc:"Ты умеешь контролировать свои эмоции.", img:"6.jpg"},
+            {title:"Романтичная женщина", desc:"Любовь важна для тебя.", img:"7.jpg"},
+            {title:"Реалистичная женщина", desc:"Ты твердо стоишь на земле.", img:"8.jpg"},
+            {title:"Искренняя женщина", desc:"Люди быстро доверяют тебе.", img:"9.jpg"},
+            {title:"Разносторонняя женщина", desc:"Ты сильная и многогранная личность.", img:"10.jpg"}
+        ],
+        questions: [
+            {q:"1. Сколько тебе лет?", a:["До 20","20-25","25-35","35+"]},
+            {q:"2. Твой статус?", a:["Школа","Университет","Работаю","Не работаю"]},
+            {q:"3. Хобби?", a:["Чтение","Рисование","Путешествия","Спорт"]},
+            {q:"4. Любимый цвет?", a:["Белый","Синий","Красный","Черный"]},
+            {q:"5. Любимая музыка?", a:["Поп","Рок","Романтическая","Рэп"]},
+            {q:"6. С кем любишь проводить время?", a:["Семья","Друзья","Один","Любимый человек"]},
+            {q:"7. Где хотел бы жить?", a:["Город","Село","Природа","Море"]},
+            {q:"8. Твой стиль одежды?", a:["Простой","Модный","Спортивный","Элегантный"]},
+            {q:"9. Любимый жанр фильма?", a:["Фантастика","Драма","Комедия","Романтика"]},
+            {q:"10. Любимое животное?", a:["Собака","Птица","Кролик","Кошка"]}
+        ]
+    },
+    ge: {
+        back:"უკან", retry:"თავიდან", next:"შემდეგი", prev:"უკან", finish:"გაიგე",
+        alert: "გთხოვთ აირჩიოთ ვარიანტი!",
+        results: [
+            {title:"მეოცნებე ქალი", desc:"თქვენ გაქვთ დიდი ფანტაზია.", img:"1.jpg"},
+            {title:"შემოქმედებითი ქალი", desc:"თქვენ ქმნით ახალ იდეებს.", img:"2.jpg"},
+            {title:"მოწყალე ქალი", desc:"თქვენ გაქვთ რბილი გული.", img:"3.jpg"},
+            {title:"იდეალური ქალი", desc:"თქვენ ქმნით ბალანსს ყველაფერში.", img:"4.jpg"},
+            {title:"ფიზიკურად ძლიერი ქალი", desc:"თქვენი ენერგია ძალიან მაღალია.", img:"5.jpg"},
+            {title:"ემოციურად ძლიერი ქალი", desc:"თქვენ აკონტროლებთ თქვენს ემოციებს.", img:"6.jpg"},
+            {title:"რომანტიკული ქალი", desc:"სიყვარული თქვენთვის მნიშვნელოვანია.", img:"7.jpg"},
+            {title:"რეალისტი ქალი", desc:"თქვენ მყარად დგახართ მიწაზე.", img:"8.jpg"},
+            {title:"გულწრფელი ქალი", desc:"ხალხი სწრაფად გენდობათ.", img:"9.jpg"},
+            {title:"უნივერსალური ქალი", desc:"თქვენ ხართ მრავალმხრივი და ძლიერი.", img:"10.jpg"}
+        ],
+        questions: [
+            {q:"1. რამდენი წლის ხარ?", a:["20 წლამდე","20-25","25-35","35+"]},
+            {q:"2. სტატუსი?", a:["სკოლა","უნივერსიტეტი","ვმუშაობ","არ ვმუშაობ"]},
+            {q:"3. ჰობი?", a:["კითხვა","ხატვა","მოგზაურობა","სპორტი"]},
+            {q:"4. საყვარელი ფერი?", a:["თეთრი","ლურჯი","წითელი","შავი"]},
+            {q:"5. საყვარელი მუსიკა?", a:["პოპი","როკი","რომანტიკული","რეპი"]},
+            {q:"6. ვისთან გინდა დროის გატარება?", a:["ოჯახი","მეგობრები","მარტო","საყვარელი ადამიანი"]},
+            {q:"7. სად გინდა ცხოვრება?", a:["ქალაქი","სოფელი","ბუნება","ზღვა"]},
+            {q:"8. შენი სტილი?", a:["მარტივი","მოდა","სპორტი","ელეგანტური"]},
+            {q:"9. საყვარელი ფილმის ჟანრი?", a:["ფანტასტიკა","დრამა","კომედია","რომანტიკა"]},
+            {q:"10. საყვარელი ცხოველი?", a:["ძაღლი","ჩიტი","კურდღელი","კატა"]}
+        ]
+    },
+    hy: {
+        back:"Հետ", retry:"Կրկնել", next:"Առաջ", prev:"Հետ", finish:"Իմանալ",
+        alert: "Խնդրում ենք ընտրել տարբերակը:",
+        results: [
+            {title:"Երազկոտ կին", desc:"Դու ունես շատ վառ երևակայություն։", img:"1.jpg"},
+            {title:"Ստեղծագործ կին", desc:"Դու ստեղծում ես նոր գաղափարներ։", img:"2.jpg"},
+            {title:"Խղճող կին", desc:"Քո սիրտը շատ մեղմ է։", img:"3.jpg"},
+            {title:"Իդեալական կին", desc:"Դու հավասարակշռություն ես ստեղծում ամեն ինչում։", img:"4.jpg"},
+            {title:"Ֆիզիկապես ուժեղ կին", desc:"Քո էներգիան շատ բարձր է։", img:"5.jpg"},
+            {title:"Էմոցիանալ ուժեղ կին", desc:"Դու կարող ես կառավարել քո զգացմունքները։", img:"6.jpg"},
+            {title:"Ռոմանտիկ կին", desc:"Սերը կարևոր է քեզ համար։", img:"7.jpg"},
+            {title:"Ռեալիստ կին", desc:"Քո ոտքերը հաստատուն են հողի վրա։", img:"8.jpg"},
+            {title:"Անկեղծ կին", desc:"Մարդիկ քեզ արագ են վստահում։", img:"9.jpg"},
+            {title:"Բազմակողմանի կին", desc:"Դու ուժեղ և բազմակողմանի մարդ ես։", img:"10.jpg"}
+        ],
+        questions: [
+            {q:"1. Քանի՞ տարեկան եք:", a:["20-ից ցածր","20-25","25-35","35+"]},
+            {q:"2. Ձեր կարգավիճակը:", a:["Դպրոց","Համալսարան","Աշխատում եմ","Չեմ աշխատում"]},
+            {q:"3. Հոբբի՞ն:", a:["Կարդալ","Նկարել","Ճամփորդել","Սպորտ"]},
+            {q:"4. Սիրած գույնը:", a:["Սպիտակ","Կապույտ","Կարմիր","Սև"]},
+            {q:"5. Սիրած երաժշտությունը:", a:["Պոպ","Ռոք","Ռոմանտիկ","Ռեփ"]},
+            {q:"6. Ու՞մ հետ եք սիրում ժամանակ անցկացնել:", a:["Ընտանիք","Ընկերներ","Միայնակ","Սիրելի էակ"]},
+            {q:"7. Որտե՞ղ կցանկանայիք ապրել:", a:["Քաղաք","Գյուղ","Բնություն","Ծով"]},
+            {q:"8. Հագուստի ոճը:", a:["Պարզ","Ոճային","Սպորտային","Էլեգանտ"]},
+            {q:"9. Ֆիլմի սիրելի ժանրը:", a:["Ֆանտաստիկ","Դրամա","Կոմեդիա","Ռոմանտիկա"]},
+            {q:"10. Սիրելի կենդանին:", a:["Շուն","Թռչուն","Ճագար","Կատու"]}
+        ]
+    }
+};
+
+let currentLang = localStorage.getItem("lang") || "az";
+let userAnswers = new Array(10).fill(0);
+
+const quizContainer = document.getElementById("quiz");
+const langSelect = document.getElementById("langSelect");
+
+function renderQuiz() {
+    quizContainer.innerHTML = "";
+    const langData = languages[currentLang];
+    
+    // Ümumi düymələrin tərcüməsi
+    document.getElementById("backbtn").innerText = langData.back;
+    document.getElementById("retryBtn").innerText = langData.retry;
+
+    langData.questions.forEach((q, index) => {
+        const qDiv = document.createElement("div");
+        qDiv.className = `question ${index === 0 ? 'active' : ''}`;
+        qDiv.id = `q-${index}`;
+
+        qDiv.innerHTML = `<h3>${q.q}</h3>`;
+        
+        const ansDiv = document.createElement("div");
+        ansDiv.className = "answers";
+
+        q.a.forEach((option, i) => {
+            const btn = document.createElement("button");
+            btn.innerText = option;
+            // Əgər əvvəlcədən seçilibsə rənglə
+            if(userAnswers[index] === i + 1) btn.classList.add("selected");
+            
+            btn.onclick = () => {
+                userAnswers[index] = i + 1;
+                const buttons = ansDiv.querySelectorAll("button");
+                buttons.forEach(b => b.classList.remove("selected"));
+                btn.classList.add("selected");
+            };
+            ansDiv.appendChild(btn);
+        });
+
+        qDiv.appendChild(ansDiv);
+
+        const navDiv = document.createElement("div");
+        navDiv.className = "nav";
+
+        if (index > 0) {
+            const prevBtn = document.createElement("button");
+            prevBtn.innerText = langData.prev;
+            prevBtn.onclick = () => navigate(index, index - 1);
+            navDiv.appendChild(prevBtn);
+        }
+
+        const nextBtn = document.createElement("button");
+        if (index < langData.questions.length - 1) {
+            nextBtn.innerText = langData.next;
+            nextBtn.onclick = () => navigate(index, index + 1);
+        } else {
+            nextBtn.innerText = langData.finish;
+            nextBtn.style.background = "#4CAF50";
+            nextBtn.onclick = finishQuiz;
+        }
+        navDiv.appendChild(nextBtn);
+
+        qDiv.appendChild(navDiv);
+        quizContainer.appendChild(qDiv);
+    });
+}
+
+function navigate(current, next) {
+    // İrəli gedəndə cavab seçilibsə icazə ver
+    if (next > current && userAnswers[current] === 0) {
+        alert(languages[currentLang].alert);
+        return;
+    }
+    document.getElementById(`q-${current}`).classList.remove("active");
+    document.getElementById(`q-${next}`).classList.add("active");
+}
+
+function finishQuiz() {
+    if (userAnswers.includes(0)) {
+        alert(languages[currentLang].alert);
+        return;
+    }
+    
+    let sum = userAnswers.reduce((a, b) => a + b, 0);
+    // Numeroloji hesablama (xalları tək rəqəmə endir)
+    while (sum > 10) {
+        sum = sum.toString().split("").reduce((a, b) => a + Number(b), 0);
+    }
+    
+    const result = languages[currentLang].results[sum - 1] || languages[currentLang].results[0];
+    
+    quizContainer.style.display = "none";
+    document.querySelector(".buttons").style.display = "none";
+    
+    const resDiv = document.getElementById("result");
+    resDiv.style.display = "block";
+    document.getElementById("resTitle").innerText = result.title;
+    document.getElementById("resDesc").innerText = result.desc;
+    document.getElementById("resImage").src = result.img;
+}
+
+// Dil seçimi dəyişəndə
+langSelect.value = currentLang;
+langSelect.onchange = (e) => {
+    currentLang = e.target.value;
+    localStorage.setItem("lang", currentLang);
+    renderQuiz(); // Bütün sualları və düymələri yeni dildə yenidən yaradır
+};
+
+// İlk başlanğıc
+renderQuiz();
+</script>
+
+</body>
+</html>
