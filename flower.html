@@ -158,7 +158,7 @@ document.getElementById("checkBtn").addEventListener("click",function(){
   }
   while(total>9) total = (total%10) + Math.floor(total/10);
   const flower = flowers[lang][total-1];
-  document.getElementById("result").innerHTML = `<img src="img/flower${total}.jpg" alt="${flower.name}"><p>${flower.name}: ${flower.text}</p>`;
+  document.getElementById("result").innerHTML = `<img src="flower${total}.jpg" alt="${flower.name}"><p>${flower.name}: ${flower.text}</p>`;
 });
 </script>
 
